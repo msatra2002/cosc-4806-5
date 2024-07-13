@@ -4,15 +4,24 @@
 <meta charset="UTF-8">
 <title>Floating Label Input</title>
 <style>
+	@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap");
+
+	*,
+	*::before,
+	*::after {
+		margin: 0;
+		padding: 0;
+
+	}
 		/* Basic styling for the body */
 		body {
-				font-family: 'Arial', sans-serif;
+				font-family: 'Poppins', sans-serif;
 				display: flex;
 				justify-content: center;
 				align-items: center;
 				height: 100vh;
 				margin: 0;
-				background-color: #f0f0f0;
+				
 		}
 
 		/* Styling for the container of the input field */
@@ -54,7 +63,7 @@
 		.form-field input:not(:placeholder-shown) + label {
 				top: -25px;
 				left: 0;
-				background: #f0f0f0; /* Match the background to the body */
+				
 				padding: 0 5px;
 				font-size: 12px;
 				color: #4CAF50;
@@ -73,7 +82,7 @@
 		margin: 1em 0.8em;
 	}
 	.button.type2 {
-		color: #16a085;
+		color: #4CAF50;
 	}
 	.button.type2.type2:after, .button.type2.type2:before {
 		content: "";
@@ -83,7 +92,7 @@
 		left: 0;
 		width: 100%;
 		height: 2px;
-		background-color: #16a085;
+		background-color: #4CAF50;
 		transition: all 0.3s ease;
 		transform: scale(0.85);
 	}
@@ -97,6 +106,20 @@
 </style>
 </head>
 <body>
+	<?php
+	// Display error messages if they exist
+	if (isset($_SESSION['failedAuth']) && !empty($_SESSION['failedAuth'])) {
+		 echo "<p style='color: red;'>" . $_SESSION['failedAuth'] . "</p>";
+	}
+		if (isset($_SESSION['lastFailedAuthTime']) && 		 
+						!empty($_SESSION['lastFailedAuthTime'])) {
+			echo "<p style='color: red;'>" . $_SESSION['error_message'] . $_SESSION['lastFailedAuthTime'] . "</p>";
+		}
+		if ($_SESSION['failedAuth'] > 3){
+			echo "<p style='color: red;'>" . $_SESSION['error_message'] . "</p>";
+
+		}
+	?>
 <form action="/login/verify" method="post" >
 <div class="form-field">
 	

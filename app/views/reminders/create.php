@@ -45,6 +45,8 @@
             </div>
         </div>
     </div>
+  <br>
+  <p><a href="/reminders/index" class="btn btn-primary">Back to reminders</a></p>
     <?php
     
     

@@ -13,7 +13,7 @@ class reports extends Controller {
       //$list_of_reminders = $reminder->get_all_reminders_Admin();
       $list_of_reminders = $reminder->getEmAll();
       //$this->view('reports/index', ['reminders' => $list_of_reminders]);
-      $this->view('reports/index', ['reminders' => $list_of_reminders , 'most' => $reminder->getMostRminders() ,'most1' => $reminder->getemRminders()]);
+      $this->view('reports/index', ['reminders' => $list_of_reminders , 'most' => $reminder->getMostRminders() ,'most1' => $reminder->getemRminders() ,'most2' => $user->getemUsers() ]);
       
       
 

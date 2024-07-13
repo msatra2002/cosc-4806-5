@@ -33,11 +33,12 @@ class reminder {
     }
     public function getMostRminders(){
         $db = db_connect();
-        $statement = $db->prepare("SELECT user_id, COUNT(id) AS reminder_count
-FROM reminders
-GROUP BY user_id
-ORDER BY reminder_count DESC
-LIMIT 1");
+        $statement = $db->prepare("SELECT u.username, COUNT(r.id) AS reminder_count
+           FROM reminders r
+           JOIN users u ON r.user_id = u.id
+           GROUP BY r.user_id
+           ORDER BY reminder_count DESC
+           LIMIT 1");
 
             $statement -> execute();
         $rows = $statement -> fetchAll(PDO::FETCH_ASSOC);
@@ -46,16 +47,18 @@ LIMIT 1");
     }
     public function getemRminders(){
         $db = db_connect();
-                $statement = $db->prepare("SELECT user_id, COUNT(id) AS reminder_count
-        FROM reminders
-        GROUP BY user_id
-        ORDER BY reminder_count DESC ");
+        $statement = $db->prepare("SELECT u.username, COUNT(r.id) AS reminder_count
+           FROM reminders r
+           JOIN users u ON r.user_id = u.id
+           GROUP BY r.user_id
+           ORDER BY reminder_count DESC");
 
                     $statement -> execute();
                 $rows = $statement -> fetchAll(PDO::FETCH_ASSOC);
                     return $rows;
         
     }
+    
      public function update_reminder( $subject, $reminder_id) {
      $db = db_connect();
    // //do update statement

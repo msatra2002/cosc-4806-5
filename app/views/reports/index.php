@@ -5,7 +5,7 @@
     }
 ?>
 <?php require_once 'app/views/templates/header.php' ?>
-<nav aria-label="breadcrumb" >
+<nav aria-label="breadcrumb"  class="breadcrumb-nav" >
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Home</a></li>
     <li class="breadcrumb-item active" aria-current="page">reminders</li>
@@ -17,15 +17,16 @@
     }
 ?>
 <div class="container">
-    <div class="page-header" id="banner">
+    <div >
         <div class="row">
             <div class="col-lg-12">
                 <h1>Reports</h1>
-            <p> <a href= "/reports/create">Create a report</a></p>
+           
 <style>
+    
     body {
       --color: rgba(30, 30, 30);
-      --bgColor: rgba(245, 245, 245);
+      
 
       display: grid;
       align-content: center;
@@ -76,6 +77,7 @@
            
             
             table {
+                background-color: #fff;
                 width: 100%;
                 border-collapse: collapse;
             }
@@ -107,22 +109,67 @@
                 }
 
                 echo "</tbody> </table>";
-            print_r($data['most']) ;
+            //print_r($data['most']) ;
             // echo " the id of the user with the most reminders is ".$data['most'][0]['user_id']; 
                 ?><br>
             <?php
             //echo $data['most'][0]['user_id'];
                 ?>
              <!-- <progress value="<?php //echo $data['most'][0]['reminder_count'];?>" max="<?php //echo $data['most'][0]['reminder_count'];?>"></progress> -->
-            <?php  print_r($data['most1']);?>
+            <h2>the person with the most reminders is <?php echo$data['most'][0]['username'] ;?> .</h2>
+            <h2>He has <?php echo$data['most'][0]['reminder_count'] ;?> reminder(s) .</h2>
+            <?php  //print_r($data['most1']);?>
             <?php foreach ($data['most1'] as $Allreminder){
-                echo"<br>".$Allreminder['user_id'];
+                echo"<br>".$Allreminder['username']." has ".$Allreminder['reminder_count']." reminders";
                     ?>
                     <div class="progress-container">
                 <progress value="<?php echo $Allreminder['reminder_count'];?>" max="<?php echo $data['most'][0]['reminder_count'];?>"></progress></div>
-           <?php } ?>         
-                     
-            
+           <?php } ?>   
+            <!-- <?php //print_r($data['most2']);?> -->
+            <div class="line-chart">
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <canvas id="loginAttemptsChart" width="600" height="400"></canvas>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        // Embed PHP data into JavaScript
+                        const data = <?php echo json_encode($data['most2']); ?>;
+
+                        const labels = data.map(user => user.username);
+                        const goodAttempts = data.map(user => user.GoodAttempts);
+                        const badAttempts = data.map(user => user.BadAttempts);
+
+                        const ctx = document.getElementById('loginAttemptsChart').getContext('2d');
+                        const loginAttemptsChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: labels,
+                                datasets: [
+                                    {
+                                        label: 'Good Attempts',
+                                        data: goodAttempts,
+                                        borderColor: 'blue',
+                                        fill: false
+                                    },
+                                    {
+                                        label: 'Bad Attempts',
+                                        data: badAttempts,
+                                        borderColor: 'red',
+                                        fill: false
+                                    }
+                                ]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+                    });
+                </script>
+            </div>
 
 
 

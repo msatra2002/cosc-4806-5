@@ -120,9 +120,9 @@ class User {
     if($this->userExists($username,'tries')){
       $time = time();
       $format = date('H:i:s', $time);
-      $sql = "INSERT INTO tries (attempts, time) VALUES (?, ?)";
+      $sql = "INSERT INTO tries (username ,attempts, time) VALUES (? ,?, ?)";
       $stmt = $db -> prepare($sql);
-      $stmt->execute([$attempt, $format]);
+      $stmt->execute([$username, $attempt, $format]);
     }else{
       $time = time();
       $format = date('H:i:s', $time);
@@ -131,6 +131,21 @@ class User {
 
       $stmt->execute([$username, $attempt, $format]);
     }
+  }
+  public function getemUsers() {
+      $db = db_connect();
+
+      $sql = "SELECT username, 
+                     COUNT(CASE WHEN attempts = 'good' THEN 1 END) AS GoodAttempts,
+                     COUNT(CASE WHEN attempts = 'bad' THEN 1 END) AS BadAttempts
+              FROM tries 
+              GROUP BY username;";
+
+      
+          $stmt = $db->prepare($sql);
+          $stmt->execute();
+          $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $rows;
   }
 }
 

@@ -16,7 +16,9 @@
     </div>
 <style>
   
-  
+  .breadcrumb {
+      margin-left: 50px; /* 10px away from the left side */
+  }
 
   
     @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap");
@@ -46,7 +48,7 @@
       text-align: center;
     }
 
-    ul {
+   ul {
       --col-gap: 2rem;
       --row-gap: 2rem;
       --line-w: 0.25rem;
@@ -64,7 +66,7 @@
       width: 100%;
     }
     /* line */
-    ul::before {
+   ul::before {
       content: "";
       grid-column: 1;
       grid-row: 1 / span 20;
@@ -75,12 +77,12 @@
     /* columns*/
 
     /* row gaps */
-    ul li:not(:last-child) {
+   ul li:not(:last-child) {
       margin-bottom: var(--row-gap);
     }
 
     /* card */
-    ul li {
+   ul li {
       grid-column: 2;
       --inlineP: 1.5rem;
       margin-inline: var(--inlineP);
@@ -90,7 +92,7 @@
     }
 
     /* date */
-    ul li .date {
+   ul li .date {
       --dateH: 3rem;
       height: var(--dateH);
       margin-inline: calc(var(--inlineP) * -1);
@@ -110,7 +112,7 @@
     }
 
     /* date flap */
-    ul li .date::before {
+   ul li .date::before {
       content: "";
       width: var(--inlineP);
       aspect-ratio: 1;
@@ -124,7 +126,7 @@
     }
 
     /* circle */
-    ul li .date::after {
+   ul li .date::after {
       content: "";
       position: absolute;
       width: 2rem;
@@ -139,26 +141,26 @@
     }
 
     /* title descr */
-    ul li .title,
-    ul li .descr {
+   ul li .title,
+   ul li .descr {
       background: var(--bgColor);
       position: relative;
       padding-inline: 1.5rem;
     }
-    ul li .title {
+   ul li .title {
       overflow: hidden;
       padding-block-start: 1.5rem;
       padding-block-end: 1rem;
       font-weight: 500;
     }
-    ul li .descr {
+   ul li .descr {
       padding-block-end: 1.5rem;
       font-weight: 300;
     }
 
     /* shadows */
-    ul li .title::before,
-    ul li .descr::before {
+   ul li .title::before,
+   ul li .descr::before {
       content: "";
       position: absolute;
       width: 90%;
@@ -169,16 +171,16 @@
       filter: blur(4px);
       transform: translate(-50%, 50%);
     }
-    ul li .title::before {
+   ul li .title::before {
       bottom: calc(100% + 0.125rem);
     }
 
-    ul li .descr::before {
+     ul li .descr::before {
       z-index: -1;
       bottom: 0.25rem;
     }
 
-    @media (min-width: 40rem) {
+     @media (min-width: 40rem) {
       ul {
         grid-template-columns: 1fr var(--line-w) 1fr;
       }

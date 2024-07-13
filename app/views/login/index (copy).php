@@ -1,5 +1,34 @@
 <?php require_once 'app/views/templates/headerPublic.php'?>
-<main role="main" class="container">
+<style>
+	@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap");
+
+	*,
+	*::before,
+	*::after {
+		margin: 0;
+		padding: 0;
+
+	}
+
+	body {
+		--color: rgba(30, 30, 30);
+		--bgColor: rgba(245, 245, 245);
+		min-height: 50vh;
+		display: grid;
+		align-content: center;
+		gap: 2rem;
+
+		font-family: "Poppins", sans-serif;
+		color: var(--color);
+		background: var(--bgColor);
+	}
+
+	h1 {
+		text-align: center;
+	}
+</style>
+<body>
+
     <div class="page-header" id="banner">
         <div class="row">
             <div class="col-lg-12">
@@ -7,20 +36,7 @@
             </div>
         </div>
     </div>
-	<?php
-	// Display error messages if they exist
-	if (isset($_SESSION['failedAuth']) && !empty($_SESSION['failedAuth'])) {
-		 echo "<p style='color: red;'>" . $_SESSION['failedAuth'] . "</p>";
-	}
-		if (isset($_SESSION['lastFailedAuthTime']) && 		 
-     				!empty($_SESSION['lastFailedAuthTime'])) {
-			echo "<p style='color: red;'>" . $_SESSION['error_message'] . $_SESSION['lastFailedAuthTime'] . "</p>";
-		}
-		if ($_SESSION['failedAuth'] > 3){
-			echo "<p style='color: red;'>" . $_SESSION['error_message'] . "</p>";
-			
-		}
-	?>
+	
 		
 
 <div class="row">
@@ -42,4 +58,5 @@
 			<a href="/create">Create an account</a>
 	</div>
 </div>
+			</body>
     <?php require_once 'app/views/templates/footer.php' ?>
